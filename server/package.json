@@ -5,7 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon index.js"
+    "build": "vite build",
+  "dev": "vite",
+  "preview": "vite preview"
   },
   "keywords": [],
   "author": "",
