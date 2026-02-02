@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+:root {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #f8fafc; /* slate-50 */
+  color: #0f172a;            /* slate-900 */
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure buttons and inputs feel high-quality */
+input:focus {
+  outline: none;
+}
+
+button, a {
+  transition: transform 0.1s active, background-color 0.2s ease-in-out;
+}
+
+button:active {
+  transform: scale(0.98); /* Subtle "click" effect */
+}
