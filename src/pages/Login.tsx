@@ -12,7 +12,7 @@ const Login = () => {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:5000/auth/login', {
+      const response = await fetch('http://localhost:5001/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -33,9 +33,9 @@ const Login = () => {
   };
 
   return (
-    <div className="flex min-h-screen flex-col justify-center bg-slate-50 px-6 py-12 lg:px-8">
+    <div className="flex min-h-screen flex-col justify-center bg-slate-50 px-6 py-12 lg:px-8 text-left">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <h2 className="mt-10 text-center text-3xl font-bold tracking-tight text-red-600">
+        <h2 className="mt-10 text-3xl font-bold tracking-tight text-red-600">
           Sign in to your account
         </h2>
       </div>
@@ -55,11 +55,13 @@ const Login = () => {
             <div className="mt-2">
               <input
                 id="email"
+                name="email" // Added for browser autofill
                 type="email"
+                autoComplete="email" // Added for accessibility
                 required
                 value={email}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-                className="block w-full rounded-md border-0 py-2 text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-2 px-3 text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm sm:leading-6"
               />
             </div>
           </div>
@@ -73,11 +75,13 @@ const Login = () => {
             <div className="mt-2">
               <input
                 id="password"
+                name="password" // Added for browser autofill
                 type="password"
+                autoComplete="current-password" // Added to resolve console warning
                 required
                 value={password}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
-                className="block w-full rounded-md border-0 py-2 text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-2 px-3 text-slate-900 shadow-sm ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm sm:leading-6"
               />
             </div>
           </div>
