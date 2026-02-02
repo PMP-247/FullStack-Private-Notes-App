@@ -19,7 +19,7 @@ const Notes = () => {
    */
   const fetchNotes = useCallback(async () => {
     try {
-      const response = await fetch('http://localhost:5001/api/notes', {
+      const response = await fetch('/api/notes', { 
         credentials: 'include',
       });
       
@@ -51,7 +51,7 @@ const Notes = () => {
     if (!newNote.trim()) return;
 
     try {
-      const response = await fetch('http://localhost:5001/api/notes', {
+      const response = await fetch('http://api/notes', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content: newNote }),
