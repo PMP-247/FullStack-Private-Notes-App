@@ -62,19 +62,31 @@ router.post('/login', async (req, res) => {
 });
 
 // POST: Logout
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 router.post('/logout', (req, res) => {
   const cookieOptions = {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',
+<<<<<<< Updated upstream
     path: '/',
     expires: new Date(0), // Sets the date to 1970 to force the browser to delete it
+=======
+    path: '/', 
+>>>>>>> Stashed changes
   };
 
   res.clearCookie('sb-access-token', cookieOptions);
   res.clearCookie('sb-refresh-token', cookieOptions);
   
   res.status(200).json({ message: 'Logged out successfully' });
+<<<<<<< Updated upstream
 });
 
 export default router;
+=======
+});
+>>>>>>> Stashed changes

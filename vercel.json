@@ -1,4 +1,5 @@
 {
+<<<<<<< Updated upstream
     "version": 2,
     "rewrites": [
       {
@@ -8,6 +9,12 @@
       {
         "source": "/(.*)",
         "destination": "/personal-notes-app/index.html"
+=======
+    "rewrites": [
+      {
+        "source": "/(.*)",
+        "destination": "/index.html"
+>>>>>>> Stashed changes
       }
     ]
   }

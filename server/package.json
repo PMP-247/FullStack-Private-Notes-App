@@ -5,9 +5,14 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+<<<<<<< Updated upstream
     "build": "vite build",
   "dev": "vite",
   "preview": "vite preview"
+=======
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+>>>>>>> Stashed changes
   },
   "keywords": [],
   "author": "",

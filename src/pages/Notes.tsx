@@ -14,12 +14,15 @@ const Notes = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+  // Define the base URL using your environment variable for Render
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+
   /**
    * 1. FETCH ALL NOTES
    */
   const fetchNotes = useCallback(async () => {
     try {
-      const response = await fetch('http://localhost:5001/api/notes', {
+      const response = await fetch(`${API_URL}/api/notes`, {
         credentials: 'include',
       });
       
@@ -37,7 +40,7 @@ const Notes = () => {
     } finally {
       setLoading(false);
     }
-  }, [navigate]);
+  }, [navigate, API_URL]);
 
   useEffect(() => {
     fetchNotes();
@@ -51,7 +54,7 @@ const Notes = () => {
     if (!newNote.trim()) return;
 
     try {
-      const response = await fetch('http://localhost:5001/api/notes', {
+      const response = await fetch(`${API_URL}/api/notes`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content: newNote }),
@@ -72,13 +75,12 @@ const Notes = () => {
    */
   const handleDeleteNote = async (id: string) => {
     try {
-      const response = await fetch(`http://localhost:5001/api/notes/${id}`, {
+      const response = await fetch(`${API_URL}/api/notes/${id}`, {
         method: 'DELETE',
         credentials: 'include',
       });
 
       if (response.ok) {
-        // Optimistically update UI or just refetch
         fetchNotes();
       } else {
         console.error('Failed to delete note');
@@ -93,7 +95,7 @@ const Notes = () => {
    */
   const handleLogout = async () => {
     try {
-      await fetch('http://localhost:5001/auth/logout', {
+      await fetch(`${API_URL}/api/auth/logout`, {
         method: 'POST',
         credentials: 'include',
       });

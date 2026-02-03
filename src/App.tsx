@@ -8,7 +8,6 @@ import Notes from './pages/Notes';
 
 /**
  * --- PROTECTED ROUTE INTERFACE ---
- * Using 'type' in the import above fixed the error 1484.
  */
 interface ProtectedRouteProps {
   children: ReactNode;
@@ -16,20 +15,22 @@ interface ProtectedRouteProps {
 
 /**
  * --- PROTECTED ROUTE COMPONENT ---
- * Gatekeeper component that checks the server for a valid session cookie.
  */
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  
+  // Define API URL for cross-platform communication (Vercel to Render)
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
 
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        // Querying the backend on Port 5001
-        const res = await fetch('http://localhost:5001/api/notes', {
+        // Querying the Render backend /api/notes endpoint
+        const res = await fetch(`${API_URL}/api/notes`, {
           credentials: 'include',
         });
         
-        // res.ok is true if status is 200-299
+        // res.ok is true if user has valid sb-access-token cookies
         setIsAuthenticated(res.ok);
       } catch (err) {
         console.error("Auth check failed:", err);
@@ -37,7 +38,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
       }
     };
     checkAuth();
-  }, []);
+  }, [API_URL]);
 
   // Show spinner during the network handshake
   if (isAuthenticated === null) {
@@ -51,7 +52,6 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
     );
   }
 
-  // Final gate: show children (Notes) or send back to Login
   return isAuthenticated ? <>{children}</> : <Navigate to="/login" replace />;
 };
 
@@ -62,14 +62,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Default Landing */}
         <Route path="/" element={<Navigate to="/login" replace />} />
-        
-        {/* Public Routes */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         
-        {/* Protected Private Route */}
         <Route 
           path="/notes" 
           element={
@@ -79,7 +75,6 @@ function App() {
           } 
         />
 
-        {/* Catch-all */}
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>

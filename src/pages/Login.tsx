@@ -7,12 +7,16 @@ const Login = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  // Define the base URL using your environment variable for Render
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
     try {
-      const response = await fetch('http://localhost:5001/auth/login', {
+      // Updated to use the full Render API path
+      const response = await fetch(`${API_URL}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -55,9 +59,9 @@ const Login = () => {
             <div className="mt-2">
               <input
                 id="email"
-                name="email" // Added for browser autofill
+                name="email"
                 type="email"
-                autoComplete="email" // Added for accessibility
+                autoComplete="email"
                 required
                 value={email}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
@@ -75,9 +79,9 @@ const Login = () => {
             <div className="mt-2">
               <input
                 id="password"
-                name="password" // Added for browser autofill
+                name="password"
                 type="password"
-                autoComplete="current-password" // Added to resolve console warning
+                autoComplete="current-password"
                 required
                 value={password}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
