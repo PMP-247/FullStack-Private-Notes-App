@@ -1,10 +1,10 @@
 import express from 'express';
-// Correct import inside routes/notes.js:
+
 import { getSupabaseWithAuth } from '../supabaseClient.js';
 
 const router = express.Router();
 
-// 1. GET ALL NOTES
+
 router.get('/notes', async (req, res) => {
   const token = req.cookies['sb-access-token'];
   console.log("Checking token:", token ? "Token received ✅" : "No token found ❌");
@@ -25,7 +25,7 @@ router.get('/notes', async (req, res) => {
   }
 });
 
-// 2. CREATE A NOTE
+
 router.post('/notes', async (req, res) => {
   const token = req.cookies['sb-access-token'];
   const { content } = req.body;
@@ -45,7 +45,6 @@ router.post('/notes', async (req, res) => {
   }
 });
 
-// 3. DELETE A NOTE
 router.delete('/notes/:id', async (req, res) => {
   const token = req.cookies['sb-access-token'];
   const { id } = req.params;

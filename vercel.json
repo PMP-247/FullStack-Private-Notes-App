@@ -1,20 +1,8 @@
 {
-<<<<<<< Updated upstream
-    "version": 2,
-    "rewrites": [
-      {
-        "source": "/api/(.*)",
-        "destination": "/server/index.js"
-      },
-      {
-        "source": "/(.*)",
-        "destination": "/personal-notes-app/index.html"
-=======
     "rewrites": [
       {
         "source": "/(.*)",
         "destination": "/index.html"
->>>>>>> Stashed changes
       }
     ]
   }

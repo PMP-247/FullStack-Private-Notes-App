@@ -7,7 +7,7 @@ const Register = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  // Define the base URL using your environment variable for Render
+ 
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
 
   const handleRegister = async (e: React.FormEvent) => {
@@ -15,7 +15,7 @@ const Register = () => {
     setError('');
 
     try {
-      // Updated to use the dynamic Render API path
+    
       const response = await fetch(`${API_URL}/api/auth/register`, {      
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -25,7 +25,7 @@ const Register = () => {
       const data = await response.json();
 
       if (response.ok) {
-        // Redirect to login after successful registration
+       
         navigate('/login');
       } else {
         setError(data.error || 'Registration failed');

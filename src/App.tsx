@@ -1,7 +1,7 @@
 import React, { useEffect, useState, type ReactNode } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
-// Page components located in src/pages/
+
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Notes from './pages/Notes';
@@ -19,18 +19,18 @@ interface ProtectedRouteProps {
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   
-  // Define API URL for cross-platform communication (Vercel to Render)
+  
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
 
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        // Querying the Render backend /api/notes endpoint
+     
         const res = await fetch(`${API_URL}/api/notes`, {
           credentials: 'include',
         });
         
-        // res.ok is true if user has valid sb-access-token cookies
+     
         setIsAuthenticated(res.ok);
       } catch (err) {
         console.error("Auth check failed:", err);
@@ -40,7 +40,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
     checkAuth();
   }, [API_URL]);
 
-  // Show spinner during the network handshake
+
   if (isAuthenticated === null) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-slate-50">

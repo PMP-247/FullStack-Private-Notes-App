@@ -7,7 +7,7 @@ const Login = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  // Define the base URL using your environment variable for Render
+
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -15,12 +15,12 @@ const Login = () => {
     setError('');
 
     try {
-      // Updated to use the full Render API path
+  
       const response = await fetch(`${API_URL}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
-        credentials: 'include', // Crucial for receiving the HTTP-only cookie
+        credentials: 'include', 
       });
       
       const data = await response.json();
@@ -93,8 +93,7 @@ const Login = () => {
           <div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-slate-900 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-slate-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900 transition-colors"
-            >
+              className="flex w-full justify-center rounded-md bg-slate-900 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-slate-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900 transition-colors"            >
               Sign in
             </button>
           </div>

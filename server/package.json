@@ -1,32 +1,25 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
+  "description": "Private Notes Backend",
   "main": "index.js",
   "type": "module",
   "scripts": {
-<<<<<<< Updated upstream
-    "build": "vite build",
-  "dev": "vite",
-  "preview": "vite preview"
-=======
     "dev": "nodemon index.js",
     "start": "node index.js"
->>>>>>> Stashed changes
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@supabase/supabase-js": "^2.90.1",
-    "cookie-parser": "^1.4.7",
+    "@supabase/supabase-js": "^2.39.0",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
-    "dotenv": "^17.2.3",
-    "express": "^5.2.1"
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
-    "@types/cookie-parser": "^1.4.10",
-    "@types/express": "^5.0.6",
-    "nodemon": "^3.1.11"
+    "nodemon": "^3.0.2"
   }
 }

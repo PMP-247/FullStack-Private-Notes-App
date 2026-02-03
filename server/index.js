@@ -3,34 +3,15 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import authRoutes from './routes/auth.js';
-<<<<<<< Updated upstream
-import noteRoutes from './routes/notes.js'; // Added this line
-
-const app = express();
-
-app.use((req, res, next) => {
-  const allowedOrigins = ["http://localhost:5173", "http://127.0.0.1:5173"];
-  const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
-    res.header("Access-Control-Allow-Origin", origin);
-  }
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.header("Access-Control-Allow-Credentials", "true");
-
-  if (req.method === "OPTIONS") return res.sendStatus(200);
-  next();
-});
-=======
 import noteRoutes from './routes/notes.js';
 
 const app = express();
 
-// UPDATED CORS: Allow both local development and your Vercel production domain
+// UPDATED CORS: Allow local development and your Render/Vercel URLs
 const allowedOrigins = [
   "http://localhost:5173",
   "http://127.0.0.1:5173",
-  process.env.FRONTEND_URL // We will add this to your .env and Vercel settings
+  process.env.FRONTEND_URL // This will be your Vercel URL
 ];
 
 app.use(cors({
@@ -45,30 +26,18 @@ app.use(cors({
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
->>>>>>> Stashed changes
 
 app.use(express.json());
 app.use(cookieParser());
 
-<<<<<<< Updated upstream
-// Connect your routes
-app.use('/auth', authRoutes);
-app.use('/api', noteRoutes); // This tells the server to look in notes.js for /api/notes
+// ROUTES
+app.use('/api/auth', authRoutes); 
+app.use('/api', noteRoutes);      
 
 app.get('/', (req, res) => res.send('Server is alive!'));
 
-const PORT = 5001;
-app.listen(PORT, '0.0.0.0', () => console.log(`🚀 Server active on port ${PORT}`));
-=======
-// UPDATED ROUTES: Aligning with the frontend's /api prefix
-app.use('/api/auth', authRoutes); // Frontend now calls /api/auth/login
-app.use('/api', noteRoutes);      // Frontend now calls /api/notes
-
-app.get('/', (req, res) => res.send('Server is alive!'));
-
-// Vercel handles the port automatically in production
+// Render and Vercel handle the port automatically
 const PORT = process.env.PORT || 5001;
-app.listen(PORT, () => console.log(`🚀 Server active on port ${PORT}`));
->>>>>>> Stashed changes
+app.listen(PORT, '0.0.0.0', () => console.log(`🚀 Server active on port ${PORT}`));
 
 export default app;

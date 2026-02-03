@@ -14,7 +14,7 @@ const Notes = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // Define the base URL using your environment variable for Render
+
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
 
   /**
